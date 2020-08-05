@@ -39,8 +39,8 @@ Depending on the size of the map you're editing you may want to adjust those num
 DZB collision has custom properties that determine how the collision behaves. Is it solid or water, what sound do footsteps make on it, can the player climb up it, etc.  
 
 There are two different type of DZB custom properties, and each is found in a different place in Blender.  
-The first type is tied to each mesh object. These can be found in the Object Properties tab, by scrolling to the bottom of it and expanding "Custom Properties". You should see properties including is_lava, is_water, and rtbl_index here.  
-The second type is tied to individual faces within a mesh. These are handled by having a material hold the properties, so they can be found in the Material properties tab, by scrolling to the bottom of it and expanding "Custom Properties". You should see properties including attribute_type, exit_index, and sound_id here.  
+* The first type is tied to each mesh object. These can be found in the Object Properties tab, by scrolling to the bottom of it and expanding "Custom Properties". You should see properties including is_lava, is_water, and rtbl_index here.  
+* The second type is tied to individual faces within a mesh. These are handled by having a material hold the properties, so they can be found in the Material properties tab, by scrolling to the bottom of it and expanding "Custom Properties". You should see properties including attribute_type, exit_index, and sound_id here.  
 
 Note that because the second type of property is held by a material, if you edit a property on a material for one face, all other faces in the whole model with those same properties will be affected because they share the same material.  
 You may want that, but if you don't, and only want to change a property for a few specific faces, you will first need to make a copy of the material they have so that it's separated from the material the other faces use.  
