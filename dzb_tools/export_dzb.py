@@ -1,5 +1,6 @@
 
 import bpy
+import bmesh
 import math
 import os
 import sys
@@ -9,8 +10,6 @@ import colorsys
 from fs_helpers import *
 from dzb import DZB
 from dzb_constants import GROUP_ATTRIBUTE_NAMES, PROPERTY_ATTRIBUTE_NAMES
-
-# TODO: what happens if the blender model has n-gons or quads?
 
 def save(out_file_path):
   dzb = DZB()
@@ -68,6 +67,13 @@ def save(out_file_path):
     
     if object.type == "MESH":
       mesh = object.data
+      
+      # Triangulate the mesh since DZB only supports triangular faces.
+      bm = bmesh.new()
+      bm.from_mesh(mesh)
+      bmesh.ops.triangulate(bm, faces=bm.faces[:])
+      bm.to_mesh(mesh)
+      bm.free()
       
       properties_for_group = []
       for material in mesh.materials:
