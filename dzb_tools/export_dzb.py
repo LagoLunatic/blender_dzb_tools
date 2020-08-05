@@ -6,10 +6,9 @@ import sys
 from io import BytesIO
 import colorsys
 
-from .dzb import DZB
-from .fs_helpers import *
-
-from .dzb_constants import GROUP_ATTRIBUTE_NAMES, PROPERTY_ATTRIBUTE_NAMES
+from fs_helpers import *
+from dzb import DZB
+from dzb_constants import GROUP_ATTRIBUTE_NAMES, PROPERTY_ATTRIBUTE_NAMES
 
 # TODO: what happens if the blender model has n-gons or quads?
 

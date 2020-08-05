@@ -1,16 +1,17 @@
 
-if "bpy" in locals():
-  import importlib
-  importlib.reload(fs_helpers)
-  importlib.reload(dzb)
-  importlib.reload(dzb_constants)
-  importlib.reload(import_dzb)
-  importlib.reload(export_dzb)
-else:
-  import bpy
-  from . import import_dzb
-  from . import export_dzb
+import os
+import sys
 
+if __name__ not in ["__main__", "__init__"]:
+  addon_dir = os.path.dirname(__file__)
+  assert os.path.isdir(addon_dir)
+  if addon_dir not in sys.path:
+    sys.path.append(addon_dir)
+
+import import_dzb
+import export_dzb
+
+import bpy
 from bpy.types import Operator
 from bpy_extras.io_utils import ImportHelper, ExportHelper
 
@@ -75,5 +76,5 @@ def unregister():
   bpy.utils.unregister_class(ImportDZB)
   bpy.utils.unregister_class(ExportDZB)
 
-if __name__ == "__main__":
+if __name__ in ["__main__", "__init__"]:
   register()

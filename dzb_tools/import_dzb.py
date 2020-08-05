@@ -4,10 +4,9 @@ import math
 from io import BytesIO
 import colorsys
 
-from .dzb import DZB
-
-from .dzb_constants import GROUP_ATTRIBUTE_NAMES, GROUP_ATTRIBUTE_BOOLS, GROUP_ATTRIBUTE_INTS
-from .dzb_constants import PROPERTY_ATTRIBUTE_NAMES, PROPERTY_ATTRIBUTE_INTS, PROPERTY_ATTRIBUTE_ENUMS
+from dzb import DZB
+from dzb_constants import GROUP_ATTRIBUTE_NAMES, GROUP_ATTRIBUTE_BOOLS, GROUP_ATTRIBUTE_INTS
+from dzb_constants import PROPERTY_ATTRIBUTE_NAMES, PROPERTY_ATTRIBUTE_INTS, PROPERTY_ATTRIBUTE_ENUMS
 
 OCTREE_DEBUG = False
 

@@ -1,7 +1,7 @@
 
 from io import BytesIO
 
-from .fs_helpers import *
+from fs_helpers import *
 
 class DZB:
   MAX_FACES_PER_OCTREE_BLOCK = 10
