@@ -51,3 +51,5 @@ This can be done like so:
 4. Below the materials list, there should be a button with a checkered sphere icon and a down arrow inside it. Click this button, and select the material you want to copy from (e.g. "PropertyInfoSet-0040"). This will put that material in the new slot, but does not make a copy yet.
 5. Exit edit mode, and click the number button to the left of the shield icon. This will make a copy of the material, and will change the name to something like "PropertyInfoSet-0040.001".
 6. You can now assign this new material to the faces you wanted to edit, and change its custom properties freely without worrying about the original material being modified.
+
+![dzb copy material guide](https://i.imgur.com/J5eB1MD.png)
