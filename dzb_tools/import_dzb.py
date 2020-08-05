@@ -5,45 +5,9 @@ from io import BytesIO
 import colorsys
 
 from dzb import DZB
-from dzb_constants import GROUP_ATTRIBUTE_NAMES, GROUP_ATTRIBUTE_BOOLS, GROUP_ATTRIBUTE_INTS
-from dzb_constants import PROPERTY_ATTRIBUTE_NAMES, PROPERTY_ATTRIBUTE_INTS, PROPERTY_ATTRIBUTE_ENUMS
+from dzb_constants import GROUP_ATTRIBUTE_NAMES, PROPERTY_ATTRIBUTE_NAMES, PROPERTY_ATTRIBUTE_INTS
 
 OCTREE_DEBUG = False
-
-# TODO: maybe move these enum things to the register function.
-for attr_name in GROUP_ATTRIBUTE_BOOLS:
-  bool_property = bpy.props.BoolProperty(
-    name=attr_name,
-  )
-  setattr(bpy.types.Object, attr_name, bool_property)
-
-for attr_name, (min, max) in GROUP_ATTRIBUTE_INTS.items():
-  int_property = bpy.props.IntProperty(
-    name=attr_name,
-    min=min,
-    max=max,
-  )
-  setattr(bpy.types.Object, attr_name, int_property)
-
-for attr_name, (min, max) in PROPERTY_ATTRIBUTE_INTS.items():
-  int_property = bpy.props.IntProperty(
-    name=attr_name,
-    min=min,
-    max=max,
-  )
-  setattr(bpy.types.Material, attr_name, int_property)
-
-for attr_name, enum_values in PROPERTY_ATTRIBUTE_ENUMS.items():
-  enum_value_items = []
-  for enum_name, enum_value in enum_values.items():
-    enum_value_items.append((enum_name, enum_name.replace("_", " "), "", "NONE", enum_value))
-  
-  enum_property = bpy.props.EnumProperty(
-    name=attr_name,
-    items=enum_value_items,
-    default=enum_value_items[0][0],
-  )
-  setattr(bpy.types.Material, attr_name, enum_property)
 
 def read(in_file_path):
   with open(in_file_path, "rb") as f:
@@ -86,7 +50,7 @@ def read(in_file_path):
       rgb = colorsys.hsv_to_rgb(h, s, v)
       
       alpha = 1.0
-      if property.sound_id in [19, 20]: # TODO: check out 24, 23 as well
+      if property.sound_id in [19, 20]:
         # If the property has a water sound effect, make it partially transparent.
         # (Unfortunately whether it is actually water or not is determined by the group, so we can't determine it at the material level without using a hack like this.)
         alpha = 0.5

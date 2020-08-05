@@ -10,6 +10,8 @@ if __name__ not in ["__main__", "__init__"]:
 
 import import_dzb
 import export_dzb
+from dzb_constants import GROUP_ATTRIBUTE_BOOLS, GROUP_ATTRIBUTE_INTS
+from dzb_constants import PROPERTY_ATTRIBUTE_INTS, PROPERTY_ATTRIBUTE_ENUMS
 
 import bpy
 from bpy.types import Operator
@@ -64,17 +66,70 @@ def menu_func_import(self, context):
 def menu_func_export(self, context):
   self.layout.operator(ExportDZB.bl_idname, text='DZB Collision (.dzb)', icon='NONE')
 
+def register_custom_properties():
+  # Register custom object/material properties.
+  # TODO: A less hacky way of doing this is to make subclasses and register the custom properties on the subclasses, instead of the base Blender classes shared by everything.
+  
+  for attr_name in GROUP_ATTRIBUTE_BOOLS:
+    bool_property = bpy.props.BoolProperty(
+      name=attr_name,
+    )
+    setattr(bpy.types.Object, attr_name, bool_property)
+  
+  for attr_name, (min, max) in GROUP_ATTRIBUTE_INTS.items():
+    int_property = bpy.props.IntProperty(
+      name=attr_name,
+      min=min,
+      max=max,
+    )
+    setattr(bpy.types.Object, attr_name, int_property)
+  
+  for attr_name, (min, max) in PROPERTY_ATTRIBUTE_INTS.items():
+    int_property = bpy.props.IntProperty(
+      name=attr_name,
+      min=min,
+      max=max,
+    )
+    setattr(bpy.types.Material, attr_name, int_property)
+  
+  for attr_name, enum_values in PROPERTY_ATTRIBUTE_ENUMS.items():
+    enum_value_items = []
+    for enum_name, enum_value in enum_values.items():
+      enum_value_items.append((enum_name, enum_name.replace("_", " "), "", "NONE", enum_value))
+    
+    enum_property = bpy.props.EnumProperty(
+      name=attr_name,
+      items=enum_value_items,
+      default=enum_value_items[0][0],
+    )
+    setattr(bpy.types.Material, attr_name, enum_property)
+
+def unregister_custom_properties():
+  for attr_name in GROUP_ATTRIBUTE_BOOLS:
+    delattr(bpy.types.Object, attr_name)
+  
+  for attr_name, (min, max) in GROUP_ATTRIBUTE_INTS.items():
+    delattr(bpy.types.Object, attr_name)
+  
+  for attr_name, (min, max) in PROPERTY_ATTRIBUTE_INTS.items():
+    delattr(bpy.types.Material, attr_name)
+  
+  for attr_name, enum_values in PROPERTY_ATTRIBUTE_ENUMS.items():
+    delattr(bpy.types.Material, attr_name)
+
 def register():
   bpy.utils.register_class(ImportDZB)
   bpy.utils.register_class(ExportDZB)
   bpy.types.TOPBAR_MT_file_import.append(menu_func_import)
   bpy.types.TOPBAR_MT_file_export.append(menu_func_export)
+  register_custom_properties()
 
 def unregister():
   bpy.types.TOPBAR_MT_file_import.remove(menu_func_import)
   bpy.types.TOPBAR_MT_file_export.remove(menu_func_export)
   bpy.utils.unregister_class(ImportDZB)
   bpy.utils.unregister_class(ExportDZB)
+  unregister_custom_properties()
 
 if __name__ in ["__main__", "__init__"]:
   register()

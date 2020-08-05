@@ -1,15 +1,15 @@
 
 GROUP_ATTRIBUTE_NAMES = [
-  #"x_scale", # TODO? preserve these?
-  #"y_scale",
-  #"z_scale",
-  #"x_rot",
-  #"y_rot",
-  #"z_rot",
+  "x_scale",
+  "y_scale",
+  "z_scale",
+  "x_rot",
+  "y_rot",
+  "z_rot",
   "unknown_1",
-  #"x_translation",
-  #"y_translation",
-  #"z_translation",
+  "x_translation",
+  "y_translation",
+  "z_translation",
   
   "room_index",
   
