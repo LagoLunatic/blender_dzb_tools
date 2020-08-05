@@ -21,7 +21,7 @@ bl_info = {
   "name": "DZB Tools",
   "author": "LagoLunatic",
   "description": "Import/export tools for DZB collision model editing.",
-  "version": (0, 1, 0),
+  "version": (1, 0, 0),
   "blender": (2, 80, 0),
   "category": "Import-Export",
   "tracker_url": "https://github.com/LagoLunatic/blender_dzb_tools/issues",
