@@ -32,6 +32,9 @@ GROUP_ATTRIBUTE_BOOLS = [
 ]
 
 GROUP_ATTRIBUTE_INTS = {
+  "x_rot": (0, 0xFFFF),
+  "y_rot": (0, 0xFFFF),
+  "z_rot": (0, 0xFFFF),
   "unknown_1": (0, 0xFFFF),
   
   "room_index": (-0x8000, 0x7FFF),
@@ -40,6 +43,15 @@ GROUP_ATTRIBUTE_INTS = {
   "sea_floor_room_index": (0, 0x3F),
   "unused_2": (0, 0x1FFF),
 }
+
+GROUP_ATTRIBUTE_FLOATS = [
+  "x_scale",
+  "y_scale",
+  "z_scale",
+  "x_translation",
+  "y_translation",
+  "z_translation",
+]
 
 PROPERTY_ATTRIBUTE_NAMES = [
   "cam_id",

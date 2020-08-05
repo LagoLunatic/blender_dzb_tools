@@ -10,7 +10,7 @@ if __name__ not in ["__main__", "__init__"]:
 
 import import_dzb
 import export_dzb
-from dzb_constants import GROUP_ATTRIBUTE_BOOLS, GROUP_ATTRIBUTE_INTS
+from dzb_constants import GROUP_ATTRIBUTE_BOOLS, GROUP_ATTRIBUTE_INTS, GROUP_ATTRIBUTE_FLOATS
 from dzb_constants import PROPERTY_ATTRIBUTE_INTS, PROPERTY_ATTRIBUTE_ENUMS
 
 import bpy
@@ -84,6 +84,12 @@ def register_custom_properties():
     )
     setattr(bpy.types.Object, attr_name, int_property)
   
+  for attr_name in GROUP_ATTRIBUTE_FLOATS:
+    float_property = bpy.props.FloatProperty(
+      name=attr_name,
+    )
+    setattr(bpy.types.Object, attr_name, float_property)
+  
   for attr_name, (min, max) in PROPERTY_ATTRIBUTE_INTS.items():
     int_property = bpy.props.IntProperty(
       name=attr_name,
@@ -109,6 +115,9 @@ def unregister_custom_properties():
     delattr(bpy.types.Object, attr_name)
   
   for attr_name, (min, max) in GROUP_ATTRIBUTE_INTS.items():
+    delattr(bpy.types.Object, attr_name)
+  
+  for attr_name in GROUP_ATTRIBUTE_FLOATS:
     delattr(bpy.types.Object, attr_name)
   
   for attr_name, (min, max) in PROPERTY_ATTRIBUTE_INTS.items():
